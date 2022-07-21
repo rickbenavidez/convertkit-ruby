@@ -14,11 +14,10 @@ end
 VCR.configure do |config|
   config.cassette_library_dir = "fixtures/vcr_cassettes"
   config.hook_into :webmock
+  config.debug_logger = File.open('test.log', 'w')
   config.filter_sensitive_data("<API_SECRET>") { ENV["API_SECRET"] }
   config.filter_sensitive_data("<API_KEY>") { ENV["API_KEY"] }
   config.allow_http_connections_when_no_cassette = true
 end
 
 WebMock.allow_net_connect!
-
-
